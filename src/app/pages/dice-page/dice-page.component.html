@@ -1,3 +1,28 @@
-<p>
-  dice-page works!
-</p>
+<div class="dice-page">
+
+	<div class="dice-page-controls">
+		<button (click)="roll()">roll</button>
+		<button (click)="roll(10)">roll 10</button>
+		<button (click)="roll(100)">roll 100</button>
+		<button (click)="roll(1000)">roll 1000</button>
+		<button (click)="roll(1000000)">roll 1000000</button>
+		<button (click)="clearTally()">clear tally</button>
+	</div>
+
+	<div class="dice-tray">
+		<div class="dice-result">{{result}}</div>
+	</div>
+
+	<div class="dice-tally">
+		<div>scale: {{getScale()}}</div>
+		<div *ngFor="let possibleResult of possibleResults">
+			<span class="dice-tally-result">{{possibleResult}}</span>:
+			<div class="dice-tally-bar"
+				 [ngStyle]="{width: tally[possibleResult] * getScale() + 'em'}"
+			>
+				<span class="dice-tally-count">{{tally[possibleResult]}}</span>
+			</div>
+		</div>
+	</div>
+
+</div>
