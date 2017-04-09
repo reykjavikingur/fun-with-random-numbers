@@ -16,11 +16,13 @@
 	<div class="dice-tally">
 		<div>scale: {{getScale()}}</div>
 		<div *ngFor="let possibleResult of possibleResults">
-			<span class="dice-tally-result">{{possibleResult}}</span>:
+			<span class="dice-tally-result"
+				  [ngClass]="{winning: scoreboard.points(possibleResult) === scoreboard.maxPoints()}"
+			>{{possibleResult}}</span>:
 			<div class="dice-tally-bar"
-				 [ngStyle]="{width: tally[possibleResult] * getScale() + 'em'}"
+				 [ngStyle]="{width: scoreboard.points(possibleResult) * getScale() + 'em'}"
 			>
-				<span class="dice-tally-count">{{tally[possibleResult]}}</span>
+				<span class="dice-tally-count">{{scoreboard.points(possibleResult)}}</span>
 			</div>
 		</div>
 	</div>

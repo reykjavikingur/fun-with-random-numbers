@@ -16,16 +16,22 @@
 		padding: 1em;
 	}
 	
+	.dice-tally-result {
+		&.winning {
+			color: #cc6666;
+		}
+	}
+	
 	.dice-tally-count {
 		
 	}
 	
 	.dice-tally-bar {
 		display: inline-block;
-		background-color: rgba(12, 150, 153, 0.7);
+		background-color: #66cc99;
 		height: 1.32em;
 		text-align: right;
-		
+		transition: width 0.4s;
 	}
 }
 

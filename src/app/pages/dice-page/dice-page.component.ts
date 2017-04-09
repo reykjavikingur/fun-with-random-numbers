@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Chooser} from "../../models/chooser";
+import {Scoreboard} from "../../models/scoreboard";
 
 @Component({
 	selector: 'p01-dice-page',
@@ -13,9 +15,14 @@ export class DicePageComponent implements OnInit {
 
 	private tally: Object;
 
+	private dice:Chooser<number>;
+
+	private scoreboard:Scoreboard;
+
 	constructor() {
 		this.possibleResults = [1, 2, 3, 4, 5, 6];
-		this.result = this.createDiceResult();
+		this.dice = new Chooser<number>(this.possibleResults);
+		this.result = this.dice.choose();
 		this.clearTally();
 	}
 
@@ -24,16 +31,14 @@ export class DicePageComponent implements OnInit {
 
 	private roll(repeats = 1) {
 		for (let i = 0; i < repeats; i++) {
-			this.result = this.createDiceResult();
+			this.result = this.dice.choose();
+			this.scoreboard.award(this.result.toString(), 1);
 			this.tally[this.result]++;
 		}
 	}
 
-	private createDiceResult(): number {
-		return Math.floor(Math.random() * 6) + 1;
-	}
-
 	private clearTally() {
+		this.scoreboard = new Scoreboard();
 		if (!this.tally) {
 			this.tally = {};
 		}
@@ -43,20 +48,9 @@ export class DicePageComponent implements OnInit {
 	}
 
 	private getScale() {
-		let max = Math.max(1, this.getMaxTally());
+		let max = Math.max(1, this.scoreboard.maxPoints());
 		let power = Math.floor(Math.log(max) / Math.log(10));
 		return 1 / Math.pow(10, power);
-	}
-
-	private getMaxTally() {
-		let max = 0;
-		for (let result in this.tally) {
-			let x = this.tally[result];
-			if (x > max) {
-				max = x;
-			}
-		}
-		return max;
 	}
 
 }
