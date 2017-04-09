@@ -13,11 +13,9 @@ export class DicePageComponent implements OnInit {
 
 	private result: number;
 
-	private tally: Object;
+	private dice: Chooser<number>;
 
-	private dice:Chooser<number>;
-
-	private scoreboard:Scoreboard;
+	private scoreboard: Scoreboard;
 
 	constructor() {
 		this.possibleResults = [1, 2, 3, 4, 5, 6];
@@ -33,18 +31,11 @@ export class DicePageComponent implements OnInit {
 		for (let i = 0; i < repeats; i++) {
 			this.result = this.dice.choose();
 			this.scoreboard.award(this.result.toString(), 1);
-			this.tally[this.result]++;
 		}
 	}
 
 	private clearTally() {
 		this.scoreboard = new Scoreboard();
-		if (!this.tally) {
-			this.tally = {};
-		}
-		for (let possibleResult of this.possibleResults) {
-			this.tally[possibleResult] = 0;
-		}
 	}
 
 	private getScale() {

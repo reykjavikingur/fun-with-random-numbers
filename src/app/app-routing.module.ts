@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {DicePageComponent} from "./pages/dice-page/dice-page.component";
+import {MarkPageComponent} from "./pages/mark-page/mark-page.component";
 
 const routes: Routes = [
 	{
@@ -10,6 +11,10 @@ const routes: Routes = [
 	{
 		path: 'dice',
 		component: DicePageComponent
+	},
+	{
+		path: 'mark',
+		component: MarkPageComponent
 	}
 ];
 
