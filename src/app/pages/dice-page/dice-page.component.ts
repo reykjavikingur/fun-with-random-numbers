@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Chooser} from "../../models/chooser";
 import {Scoreboard} from "../../models/scoreboard";
 
+const DICE_RESULTS = [1, 2, 3, 4, 5, 6];
+
 @Component({
 	selector: 'p01-dice-page',
 	templateUrl: './dice-page.component.html',
@@ -9,22 +11,30 @@ import {Scoreboard} from "../../models/scoreboard";
 })
 export class DicePageComponent implements OnInit {
 
-	private possibleResults: number[];
+	private dice: Chooser<number>;
 
 	private result: number;
-
-	private dice: Chooser<number>;
 
 	private scoreboard: Scoreboard;
 
 	constructor() {
-		this.possibleResults = [1, 2, 3, 4, 5, 6];
-		this.dice = new Chooser<number>(this.possibleResults);
-		this.result = this.dice.choose();
+		this.initializeDice();
 		this.clearTally();
 	}
 
 	ngOnInit() {
+	}
+
+	private initializeDice() {
+		this.dice = new Chooser<number>(DICE_RESULTS);
+		this.result = this.dice.choose();
+	}
+
+	private clearTally() {
+		this.scoreboard = new Scoreboard();
+		for (let r of DICE_RESULTS) {
+			this.scoreboard.award(r.toString(), 0);
+		}
 	}
 
 	private roll(repeats = 1) {
@@ -32,16 +42,6 @@ export class DicePageComponent implements OnInit {
 			this.result = this.dice.choose();
 			this.scoreboard.award(this.result.toString(), 1);
 		}
-	}
-
-	private clearTally() {
-		this.scoreboard = new Scoreboard();
-	}
-
-	private getScale() {
-		let max = Math.max(1, this.scoreboard.maxPoints());
-		let power = Math.floor(Math.log(max) / Math.log(10));
-		return 1 / Math.pow(10, power);
 	}
 
 }

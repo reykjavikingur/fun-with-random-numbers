@@ -1,0 +1,18 @@
+.scoreboard-result {
+	display: inline-block;
+	text-align: right;
+	width: 1.5em;
+	
+	&.winning {
+		color: #cc6666;
+	}
+}
+
+.scoreboard-bar {
+	display: inline-block;
+	background-color: #66cc99;
+	height: 1.32em;
+	text-align: right;
+	transition: width 0.4s;
+	width: 50%;
+}

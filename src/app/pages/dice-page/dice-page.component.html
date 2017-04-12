@@ -1,6 +1,6 @@
 <div class="dice-page">
 
-	<div class="dice-page-controls">
+	<div class="dice-controls">
 		<button (click)="roll()">roll</button>
 		<button (click)="roll(10)">roll 10</button>
 		<button (click)="roll(100)">roll 100</button>
@@ -13,18 +13,6 @@
 		<div class="dice-result">{{result}}</div>
 	</div>
 
-	<div class="dice-tally">
-		<div>scale: {{getScale()}}</div>
-		<div *ngFor="let possibleResult of possibleResults">
-			<span class="dice-tally-result"
-				  [ngClass]="{winning: scoreboard.points(possibleResult) === scoreboard.maxPoints()}"
-			>{{possibleResult}}</span>:
-			<div class="dice-tally-bar"
-				 [ngStyle]="{width: scoreboard.points(possibleResult) * getScale() + 'em'}"
-			>
-				<span class="dice-tally-count">{{scoreboard.points(possibleResult)}}</span>
-			</div>
-		</div>
-	</div>
+	<p01-scoreboard [scoreboard]="scoreboard"></p01-scoreboard>
 
 </div>

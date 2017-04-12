@@ -12,8 +12,6 @@ const DICE_RESULTS = [1, 2, 3, 4, 5, 6];
 })
 export class MarkPageComponent implements OnInit {
 
-	private possibleResults: number[];
-
 	private dice: Chooser<number>[];
 
 	private results: number[];
@@ -57,24 +55,6 @@ export class MarkPageComponent implements OnInit {
 			}
 			this.scoreboard.award(sum.toString(), 1);
 		}
-	}
-
-	private proportion(player: number): number {
-		let max = this.scoreboard.maxPoints();
-		let points = this.scoreboard.points(player.toString());
-		if (max === 0) {
-			return 0;
-		}
-		else {
-			return points / max;
-		}
-	}
-
-	private getScale() {
-		let base = 25;
-		let max = Math.max(1, this.scoreboard.maxPoints());
-		let power = Math.floor(Math.log(max) / Math.log(base));
-		return 1 / Math.pow(base, power);
 	}
 
 }

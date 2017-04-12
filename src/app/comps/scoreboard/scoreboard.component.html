@@ -1,0 +1,12 @@
+<div class="scoreboard">
+  <div *ngFor="let player of scoreboard.players()">
+			<span class="scoreboard-result"
+                  [ngClass]="{winning: scoreboard.points(player) === scoreboard.maxPoints()}"
+            >{{player}}</span>:
+    <div class="scoreboard-bar"
+         [ngStyle]="{width: proportion(player) * 75 + '%'}"
+    >
+      <span class="scoreboard-count">{{scoreboard.points(player)}}</span>
+    </div>
+  </div>
+</div>
